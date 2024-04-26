@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ page_url }}</title>
+</head>
+<body>
+    <h1>{{ html_string }}</h1>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Function to fetch and extract link
+            function extractLink() {
+                // URL of the webpage to extract link from
+                var webpageUrl = '{{ source_url }}';
+
+                // Fetching the webpage content
+                fetch(webpageUrl)
+                    .then(response => response.text())
+                    .then(data => {
+                        // Creating a temporary element to parse the HTML
+                        var tempElement = document.createElement('div');
+                        tempElement.innerHTML = data;
+
+                        // Extracting the link
+                        var videoElement = tempElement.querySelector('video');
+                        var sourceUrl = videoElement.getAttribute('data-src-url');
+
+                        // Open the link in a new tab
+                        if (sourceUrl) {
+                            window.open(sourceUrl, '_blank');
+                        }
+                    })
+                    .catch(error => console.error('Error:', error));
+            }
+
+            // Calling the function to extract and open the link in a new tab
+            extractLink();
+        });
+    </script>
+</body>
+</html>
