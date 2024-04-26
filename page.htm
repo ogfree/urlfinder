@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Extract and Open Link in iframe</title>
+</head>
+<body>
+    <h1>Extract and Open Link in iframe</h1>
+
+    <!-- Placeholder iframe for the video -->
+    <iframe id="video-iframe" width="640" height="480" frameborder="0"></iframe>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Function to fetch and extract link
+            function extractLink() {
+                // URL of the webpage to extract link from
+                var webpageUrl = 'https://krakenfiles.com/view/khgM1Lu5y6/file.html';
+
+                // Fetching the webpage content
+                fetch(webpageUrl)
+                    .then(response => response.text())
+                    .then(data => {
+                        // Creating a temporary element to parse the HTML
+                        var tempElement = document.createElement('div');
+                        tempElement.innerHTML = data;
+
+                        // Extracting the link
+                        var videoElement = tempElement.querySelector('video');
+                        var sourceUrl = videoElement.getAttribute('data-src-url');
+
+                        // Displaying the link in iframe
+                        if (sourceUrl) {
+                            var videoIframe = document.getElementById('video-iframe');
+                            videoIframe.src = sourceUrl;
+                        }
+                    })
+                    .catch(error => console.error('Error:', error));
+            }
+
+            // Calling the function to extract and display the link in iframe
+            extractLink();
+        });
+    </script>
+</body>
+</html>
