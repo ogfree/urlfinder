@@ -34,7 +34,7 @@ def scrape_video_url(url):
 
 # Example usage
 if __name__ == "__main__":
-    url = "https://krakenfiles.com/view/khgM1Lu5y6/file.html"  # Replace with the URL of the webpage you want to scrape
+    url = "https://krakenfiles.com/view/6NyeH6D4G6/file.html"  # Replace with the URL of the webpage you want to scrape
     video_url = scrape_video_url(url)
     if video_url:
         print("Video URL found:", video_url)
